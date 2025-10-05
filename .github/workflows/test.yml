@@ -16,14 +16,13 @@ on:
         - fakemail
         - inboxes
         - incognitomail
-        - emailfake
-        default: emailfake
+        default: guerrillamail
 jobs:
   Test:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout Repo'
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -31,11 +30,11 @@ jobs:
         run: |
           ACCOUNT=0
           KEY=1
-          SMALL_BUSINESS_KEY=1
-          VPN=0
+          SMALL_BUSINESS_KEY=0
+          VPN=1
           EMAIL_API="${{ github.event.inputs.mail }}"
           if [ -z "$EMAIL_API" ]; then
-            EMAIL_API="emailfake"
+            EMAIL_API="guerrillamail"
           fi
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
